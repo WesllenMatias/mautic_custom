@@ -387,6 +387,9 @@ Mautic.GetCkEditorConfigOptions  = function(ckEditorToolbarOptions, tokenCallbac
 }
 
 Mautic.InitCkEditor  = function(textarea, options) {
+    if (typeof ClassicEditor === 'undefined') {
+        return;
+    }
     ClassicEditor
         .create( textarea[0], options)
         .then( editor => {

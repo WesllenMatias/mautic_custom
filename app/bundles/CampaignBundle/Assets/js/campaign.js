@@ -836,27 +836,40 @@ Mautic.launchCampaignEditor = function() {
     Mautic.stopIconSpinPostEvent();
     mQuery('body').css('overflow-y', 'hidden');
 
-    mQuery('#campaign-builder').trigger('campaign-builder:show');
+    const $builder = mQuery('#campaign-builder');
+    $builder.addClass('builder-active').removeClass('hide');
+    mQuery('#flashes').addClass('alert-offset');
+    $builder.trigger('campaign-builder:show');
+
+    if (typeof Mautic.campaignBuilderInstance === 'undefined') {
+        Mautic.prepareCampaignCanvas();
+    }
 
     // Center new source
     if (mQuery('#CampaignEvent_newsource').length) {
         Mautic.campaignBuilderPrepareNewSource();
     }
 
-    if (Mautic.campaignBuilderCanvasSettings) {
+    if (Mautic.campaignBuilderCanvasSettings && Mautic.campaignBuilderInstance) {
         Mautic.campaignBuilderInstance.setSuspendDrawing(true);
         Mautic.campaignBuilderReconnectEndpoints();
         Mautic.campaignBuilderInstance.setSuspendDrawing(false, true);
     }
-    Mautic.campaignBuilderInstance.repaintEverything();
-    Mautic.fitCampaignToView(false);
+    if (Mautic.campaignBuilderInstance && typeof Mautic.campaignBuilderInstance.repaintEverything === 'function') {
+        Mautic.campaignBuilderInstance.repaintEverything();
+    }
+    if (typeof Mautic.fitCampaignToView === 'function') {
+        Mautic.fitCampaignToView(false);
+    }
 
     if (mQuery('#CampaignEvent_newsource').length) {
         const newSourcePosition = mQuery('#CampaignEvent_newsource').position();
-        Mautic.campaignBuilderUpdateEventList(['Source'], false, 'list', false, {
-            left: newSourcePosition.left - 50,
-            top: newSourcePosition.top + 35
-        });
+        if (newSourcePosition && typeof Mautic.campaignBuilderUpdateEventList === 'function') {
+            Mautic.campaignBuilderUpdateEventList(['Source'], false, 'list', false, {
+                left: newSourcePosition.left - 50,
+                top: newSourcePosition.top + 35
+            });
+        }
     }
 };
 

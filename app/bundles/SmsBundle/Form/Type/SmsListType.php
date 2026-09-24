@@ -44,7 +44,7 @@ final class SmsListType extends AbstractType
                 },
                 'multiple'   => true,
                 'required'   => false,
-                'sms_type'   => 'template',
+                'sms_type'   => null,
                 'top_level'  => 'translation',
                 'ignore_ids' => [],
             ]
