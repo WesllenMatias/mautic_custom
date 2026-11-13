@@ -157,11 +157,13 @@ Mautic.initSelectTheme = function(themeField) {
 
             // Code Mode
             if (isCodeMode) {
+                mQuery('#custom-html-row').removeClass('hidden');
                 mQuery('.builder').addClass('code-mode');
                 mQuery('.builder .code-editor').removeClass('hide');
                 mQuery('.builder .code-mode-toolbar').removeClass('hide');
                 mQuery('.builder .builder-toolbar').addClass('hide');
             } else {
+                mQuery('#custom-html-row').addClass('hidden');
                 mQuery('.builder').removeClass('code-mode');
                 mQuery('.builder .code-editor').addClass('hide');
                 mQuery('.builder .code-mode-toolbar').addClass('hide');

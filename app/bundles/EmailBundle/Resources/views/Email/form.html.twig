@@ -117,7 +117,7 @@
                                 </div>
                             </div>
                             <br/>
-                            <div class="row hidden" id="custom-html-row">
+                            <div class="row{% if not isCodeMode %} hidden{% endif %}" id="custom-html-row">
                                 <div class="col-md-12">
                                     {{ form_label(form.customHtml) }}
                                     {{ form_widget(form.customHtml) }}

@@ -18,6 +18,7 @@
 {% set variantParent = activePage.variantParent %}
 {% set previewUrl = previewUrl|default('') %}
 {% set draftPreviewUrl = draftPreviewUrl|default('') %}
+{% set isCodeMode = ('mautic_code_mode' is same as activePage.template) %}
 
 {% extends '@MauticCore/Default/content.html.twig' %}
 
@@ -78,7 +79,7 @@
 
                       <div class="tab-pane fade bdr-w-0" id="advanced-container">
                           <br>
-                          <div class="row hidden" id="custom-html-row">
+                          <div class="row{% if not isCodeMode %} hidden{% endif %}" id="custom-html-row">
                               <div class="col-md-12">
                                   {{ form_label(form.customHtml) }}
                                   {{ form_widget(form.customHtml) }}
