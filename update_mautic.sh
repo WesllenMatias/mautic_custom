@@ -17,6 +17,8 @@ MAUTIC_DIR="${1:-}"
 if [ -z "$MAUTIC_DIR" ]; then
     if [ -f "./index.php" ] && [ -d "./app" ] && [ -d "./plugins" ]; then
         MAUTIC_DIR="$(pwd)"
+    elif [ -d "/var/www/mautic/docroot" ]; then
+        MAUTIC_DIR="/var/www/mautic/docroot"
     elif [ -d "/var/www/html/mautic" ]; then
         MAUTIC_DIR="/var/www/html/mautic"
     elif [ -d "/var/www/mautic" ]; then
